@@ -33,5 +33,5 @@ class Sensor(BaseModel):
 
 
 class Alert(BaseModel):
-    sensor = models.ForeignKey(Sensor, related_name="alertas", on_delete=models.CASCADE)
+    sensor = models.ForeignKey(Sensor, related_name="alerts", on_delete=models.CASCADE)
     
