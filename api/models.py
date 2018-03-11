@@ -14,7 +14,7 @@ class BaseModel(models.Model):
 class Unit(BaseModel):
     name = models.CharField(max_length=255)
 
-
+#mudar o nome Local pois locals é reservado
 class Local(BaseModel):
     name = models.CharField(max_length=255)
     unit = models.ForeignKey(Unit, related_name="locals", on_delete=models.CASCADE)
@@ -33,5 +33,7 @@ class Sensor(BaseModel):
 
 
 class Alert(BaseModel):
+    max_temp = models.CharField(max_length=255)
+    min_temp = models.CharFiled(max_length=255)
     sensor = models.ForeignKey(Sensor, related_name="alerts", on_delete=models.CASCADE)
     

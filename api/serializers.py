@@ -1,5 +1,11 @@
 from rest_framework import serializers
-from api.models import Unit, Local, SensorType, Sensor
+from api.models import Unit, Local, SensorType, Sensor, Alert
+
+
+class AlertSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Alert
+        filds = ('max_temp', 'min_temp', 'sensor')
 
 
 class SensorSerializer(serializers.ModelSerializer):
@@ -9,6 +15,8 @@ class SensorSerializer(serializers.ModelSerializer):
 
 
 class LocalSerializer(serializers.ModelSerializer):
+    sensors = SensorSerializer(many=true)
+
     class Meta:
         model = Local
         fields = ('name', 'sensors')
@@ -22,6 +30,9 @@ class LocalSerializer(serializers.ModelSerializer):
 
 
 class UnitSerializer(serializers.ModelSerializer):
+    # mudar o nome locals pois ele é reservado 
+    locals = LocalSerializer(many=true)
+
     class Meta:
         model = Unit
         fields = ('name', 'locals')
