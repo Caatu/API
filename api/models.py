@@ -30,3 +30,8 @@ class Sensor(BaseModel):
     measurement_value = models.FloatField()
     unit_of_measurement = models.CharField(max_length=255)
     modified_at = models.DateTimeField(auto_now=True)
+
+
+class Alert(BaseModel):
+    sensor = models.ForeignKey(Sensor, related_name="alertas", on_delete=models.CASCADE)
+    
