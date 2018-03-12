@@ -27,14 +27,14 @@ class SensorsViewSet(viewsets.ModelViewSet):
     permission_classes = ()
 
 class SensorTypeViewSet(viewsets.ModelViewSet):
-    queryset = Sensor.objects.all()
-    serializer_class = SensorSerializer
+    queryset = SensorType.objects.all()
+    serializer_class = SensorTypeSerializer
     authentication_classes = []
     permission_classes = ()
 
 class SensorMeasureViewSet(viewsets.ModelViewSet):
-    queryset = Sensor.objects.all()
-    serializer_class = SensorSerializer
+    queryset = SensorMeasure.objects.all()
+    serializer_class = SensorMeasureSerializer
     authentication_classes = []
     permission_classes = ()
 
