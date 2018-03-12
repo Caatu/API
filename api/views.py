@@ -4,28 +4,43 @@ from django.views.decorators.csrf import csrf_exempt
 from rest_framework.renderers import JSONRenderer
 from rest_framework.parsers import JSONParser
 from api.models import Unit, Local, Sensor, Alert
+from rest_framework import viewsets
+from api.serializers import *
 # Create your views here.
 
+class UnitsViewSet(viewsets.ModelViewSet):
+    queryset = Unit.objects.all()
+    serializer_class = UnitSerializer
+    authentication_classes = []
+    permission_classes = ()
 
-@csrf_exempt
-def units_list(request):
-    if request.method == 'POST':
-        units = Unit.objects.all()
+class LocalsViewSet(viewsets.ModelViewSet):
+    queryset = Local.objects.all()
+    serializer_class = LocalSerializer
+    authentication_classes = []
+    permission_classes = ()
 
+class SensorsViewSet(viewsets.ModelViewSet):
+    queryset = Sensor.objects.all()
+    serializer_class = SensorSerializer
+    authentication_classes = []
+    permission_classes = ()
 
-@csrf_exempt
-def locals_list(request):
-    if request.method == 'POST':
-        locals = Local.objects.all()
+class SensorTypeViewSet(viewsets.ModelViewSet):
+    queryset = Sensor.objects.all()
+    serializer_class = SensorSerializer
+    authentication_classes = []
+    permission_classes = ()
 
+class SensorMeasureViewSet(viewsets.ModelViewSet):
+    queryset = Sensor.objects.all()
+    serializer_class = SensorSerializer
+    authentication_classes = []
+    permission_classes = ()
 
-@csrf_exempt
-def sensors_list(request):
-    if request.method == 'POST':
-        sensors = Sensor.objects.all()
-
-
-@csrf_exempt
-def alerts_list(request):
-    if request.method == 'POST':
-        alerts = Alert.objects.all()
+class AlertsViewSet(viewsets.ModelViewSet):
+    queryset = Alert.objects.all()
+    serializer_class = AlertSerializer
+    authentication_classes = []
+    permission_classes = ()
+    
