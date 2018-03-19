@@ -1,5 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
+from django.db.models.signals import post_save
+from django.dispatch import reciver
 
 # Abstract Model
 class BaseModel(models.Model):
@@ -15,6 +17,7 @@ class BaseModel(models.Model):
 # Create your models here.
 class Unit(BaseModel):
     name = models.CharField(max_length=255)
+    user = models.ForeignKey(User, related_name="units", on_delete=models.CASCADE)
     
 #mudar o nome Local pois locals é reservado
 class Local(BaseModel):

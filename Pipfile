@@ -1,0 +1,21 @@
+[[source]]
+name = "pypi"
+verify_ssl = true
+url = "https://pypi.python.org/simple"
+
+[packages]
+djangorestframework = "~=3.6"
+python-decouple = "*"
+django-cors-headers = "*"
+django-filter = "*"
+gunicorn = "*"
+djangorestframework-jwt = "*"
+psycopg2 = "*"
+whitenoise = "*"
+dj-database-url = "*"
+django-crispy-forms = "*"
+coreapi = "*"
+Django = "*"
+Pygments = "*"
+Markdown = "*"
+apiai = "*"
