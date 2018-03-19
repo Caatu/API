@@ -5,30 +5,30 @@ from api.models import *
 class AlertSerializer(serializers.ModelSerializer):
     class Meta:
         model = Alert
-        filds = ('max_temp', 'min_temp', 'sensor')
+        filds = ('id','max_temp', 'min_temp', 'sensor','created_at','modified_at')
 
 class SensorTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = SensorType
-        fields = ('name','created_at')
+        fields = ('id','name','created_at')
 
 class SensorMeasureSerializer(serializers.ModelSerializer):
     class Meta:
         model = SensorMeasure
-        fields = ('sensor', 'measurement_value', 'unit_of_measurement', 'modified_at')
+        fields = ('id','sensor', 'measurement_value', 'unit_of_measurement', 'modified_at')
 
 class SensorSerializer(serializers.ModelSerializer):
     sensor_type = SensorTypeSerializer()
     class Meta:
         model = Sensor
-        fields = ('sensor_type', 'local', 'name', 'modified_at')
+        fields = ('id','sensor_type', 'local', 'name', 'modified_at','created_at')
 
 class LocalSerializer(serializers.ModelSerializer):
     sensors = SensorSerializer(many=True)
 
     class Meta:
         model = Local
-        fields = ('name', 'sensors')
+        fields = ('id', 'name', 'sensors','created_at')
 
 
 class UnitSerializer(serializers.ModelSerializer):
@@ -37,7 +37,7 @@ class UnitSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Unit
-        fields = ('name', 'locals')
+        fields = ('id','name', 'locals','created_at')
 
     def create(self, validated_data):
         locals_data = validated_data.pop('locals')
