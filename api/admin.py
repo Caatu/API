@@ -11,6 +11,10 @@ class LocalAdmin(admin.ModelAdmin):
     pass
 admin.site.register(Local, LocalAdmin)
 
+class ColectorAdmin(admin.ModelAdmin):
+    pass
+admin.site.register(Colector, ColectorAdmin)
+
 class SensorAdmin(admin.ModelAdmin):
     pass
 admin.site.register(Sensor, SensorAdmin)

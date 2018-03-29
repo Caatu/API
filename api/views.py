@@ -20,6 +20,12 @@ class LocalsViewSet(viewsets.ModelViewSet):
     authentication_classes = []
     permission_classes = ()
 
+class ColectorsViewSet(viewsets.ModelViewSet):
+    queryset = Colector.objects.all()
+    serializer_class = ColectorSerializer
+    authentication_classes = []
+    permission_classes = ()
+
 class SensorsViewSet(viewsets.ModelViewSet):
     queryset = Sensor.objects.all()
     serializer_class = SensorSerializer

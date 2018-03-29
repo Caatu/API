@@ -26,6 +26,12 @@ class Local(BaseModel):
     unit = models.ForeignKey(Unit, related_name="locals", on_delete=models.CASCADE)
     
 
+class Colector(BaseModel):
+    name = models.CharField(max_length=255)
+    identify = models.CharField(max_length=255)
+    local = models.ForeignKey(Local, related_name="colectors", on_delete=models.CASCADE)
+
+
 class SensorType(BaseModel):
     name = models.CharField(max_length=255)
 
@@ -33,7 +39,7 @@ class SensorType(BaseModel):
 class Sensor(BaseModel):
     name = models.CharField(max_length=255)
     sensor_type = models.ForeignKey(SensorType, related_name="sensortype", on_delete=models.CASCADE)
-    local = models.ForeignKey(Local, related_name="sensors", on_delete=models.CASCADE)
+    colector = models.ForeignKey(Local, related_name="sensors", on_delete=models.CASCADE)
     modified_at = models.DateTimeField(auto_now=True)
 
 
@@ -44,7 +50,7 @@ class SensorMeasure(BaseModel):
     modified_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"{self.measurement_value} {self.unit_of_measurement}"
+        return "{} {}".format(self.measurement_value,self.unit_of_measurement)
 
 
 class Alert(BaseModel):

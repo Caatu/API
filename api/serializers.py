@@ -23,8 +23,15 @@ class SensorSerializer(serializers.ModelSerializer):
         model = Sensor
         fields = ('id','sensor_type', 'local', 'name', 'modified_at','created_at')
 
-class LocalSerializer(serializers.ModelSerializer):
+class ColectorSerializer(serializers.ModelSerializer):
     sensors = SensorSerializer(many=True)
+    
+    class Meta:
+        model = Colector
+        field = ('id', 'identify', 'local')
+
+class LocalSerializer(serializers.ModelSerializer):
+    colectors = ColectorSerializer(many=True)
 
     class Meta:
         model = Local

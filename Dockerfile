@@ -10,7 +10,6 @@ RUN pip3 install pipenv --upgrade
 
 WORKDIR /usr/src/app
 
-COPY Pipfile ./
-COPY Pipfile.lock ./
+COPY requirements.txt ./
 
-RUN pipenv install --dev --deploy --system
+RUN pip install -r requirements.txt

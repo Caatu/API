@@ -19,3 +19,4 @@ Django = "*"
 Pygments = "*"
 Markdown = "*"
 apiai = "*"
+paho-mqtt==1.3.1
