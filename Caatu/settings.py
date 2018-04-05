@@ -95,9 +95,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'caatu',
-        'USER': 'caatupg',
-        'PASSWORD': 'caatupg',
-        'HOST': 'db',
+        'USER': 'postgres',
+        'PASSWORD': 'postgres',
+        'HOST': 'localhost',
         'PORT': '5432',
     }
 }
