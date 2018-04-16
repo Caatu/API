@@ -1,50 +1,86 @@
+from django.contrib.auth.models import User
 from rest_framework import serializers
+from rest_framework.validators import UniqueValidator
+
 from api.models import *
+
+
+class UserSerializer(serializers.ModelSerializer):
+    email = serializers.EmailField(
+        required=True,
+        validators=[UniqueValidator(queryset=User.objects.all())]
+    )
+    username = serializers.CharField(
+        max_length=32,
+        validators=[UniqueValidator(queryset=User.objects.all())]
+    )
+    password = serializers.CharField(min_length=6, max_length=100,
+                                     write_only=True)
+
+    def create(self, validated_data):
+        user = User(email=validated_data['email'],
+                    username=validated_data['username'])
+        user.set_password(validated_data['password'])
+        user.save()
+        return user
+
+    class Meta:
+        model = User
+        fields = ('id', 'username', 'email', 'password')
 
 
 class AlertSerializer(serializers.ModelSerializer):
     class Meta:
         model = Alert
-        filds = ('id','max_temp', 'min_temp', 'sensor','created_at','modified_at')
+        filds = ('id', 'max_temp', 'min_temp',
+                 'sensor', 'created_at', 'modified_at')
+
 
 class SensorTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = SensorType
-        fields = ('id','name','created_at')
+        fields = ('id', 'name', 'created_at')
+
 
 class SensorMeasureSerializer(serializers.ModelSerializer):
     class Meta:
         model = SensorMeasure
-        fields = ('id','sensor', 'measurement_value', 'unit_of_measurement', 'modified_at')
+        fields = ('id', 'sensor', 'measurement_value',
+                  'unit_of_measurement', 'modified_at')
+
 
 class SensorSerializer(serializers.ModelSerializer):
     sensor_type = SensorTypeSerializer()
+
     class Meta:
         model = Sensor
-        fields = ('id','sensor_type', 'local', 'name', 'modified_at','created_at')
+        fields = ('id', 'sensor_type', 'local',
+                  'name', 'modified_at', 'created_at')
+
 
 class ColectorSerializer(serializers.ModelSerializer):
     sensors = SensorSerializer(many=True)
-    
+
     class Meta:
         model = Colector
         field = ('id', 'identify', 'local')
+
 
 class LocalSerializer(serializers.ModelSerializer):
     colectors = ColectorSerializer(many=True)
 
     class Meta:
         model = Local
-        fields = ('id', 'name', 'sensors','created_at')
+        fields = ('id', 'name', 'sensors', 'created_at')
 
 
 class UnitSerializer(serializers.ModelSerializer):
-    # mudar o nome locals pois ele é reservado 
+    # mudar o nome locals pois ele é reservado
     locals = LocalSerializer(many=True)
 
     class Meta:
         model = Unit
-        fields = ('id','name', 'locals','created_at')
+        fields = ('id', 'name', 'locals', 'created_at')
 
     def create(self, validated_data):
         locals_data = validated_data.pop('locals')
