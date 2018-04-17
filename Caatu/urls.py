@@ -17,9 +17,13 @@ from django.contrib import admin
 from django.urls import path, include, re_path
 import api.urls
 from rest_framework.authtoken import views
+import api.views as apiview
 urlpatterns = [
     path('admin/', admin.site.urls),
     #re_path(r'^api-auth/', include('rest_framework.urls')),
-    path('caatu/', include(api.urls)),
-    re_path(r'^api/v1/', views.obtain_auth_token),
+    path('api/', include(api.urls)),
+    # Cadastro
+    re_path(r'^api/register', apiview.UserCreate.as_view(), name='account-create'),
+    re_path(r'^api/login', apiview.UserAuth.as_view(), name='account-auth'),
+    re_path(r'^api/', views.obtain_auth_token),
 ]
