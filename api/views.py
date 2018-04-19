@@ -1,4 +1,5 @@
 from django.contrib.auth import authenticate
+from django.core.exceptions import ObjectDoesNotExist
 from django.http import HttpResponse, JsonResponse
 from django.shortcuts import render
 from django.views.decorators.csrf import csrf_exempt
@@ -57,15 +58,43 @@ class UserAuth(APIView):
         return Response("Credenciais Inválidas", status=status.HTTP_400_BAD_REQUEST)
 
 
-class UnitsViewSet(viewsets.ModelViewSet):
-    queryset = Unit.objects.all()
-    serializer_class = UnitSerializer
-    authentication_classes = []
+class UnitsView(APIView):
+
     permission_classes = ()
+
+    def get(self, request):
+        queryset = Unit.objects.all()
+        serializer = UnitSerializer(queryset, many=True)
+
+        return Response(serializer.data)
+
+    def post(self, request):
+        pass
+
+
+class UnitDetailsView(APIView):
+    permission_classes = ()
+
+    def get(self, request, pk):
+
+        try:
+            unit = Unit.objects.get(pk=pk)
+        except ObjectDoesNotExist:
+            return Response({"error": "Unidade não encontrada"}, status=status.HTTP_404_NOT_FOUND)
+
+        serializer = UnitSerializer(unit)
+
+        return Response(serializer.data)
+
+    def put(self, request, pk):
+        pass
+
+    def delete(self, request, pk):
+        pass
 
 
 class LocalsViewSet(viewsets.ModelViewSet):
-    queryset = Local.objects.all()
+    queryset = Local.objects.values('name', 'colectors')
     serializer_class = LocalSerializer
     authentication_classes = []
     permission_classes = ()
@@ -79,7 +108,7 @@ class ColectorsViewSet(viewsets.ModelViewSet):
 
 
 class SensorsViewSet(viewsets.ModelViewSet):
-    queryset = Sensor.objects.all()
+    queryset = Sensor.objects.values('name', 'sensor_type', 'measurements')
     serializer_class = SensorSerializer
     authentication_classes = []
     permission_classes = ()
