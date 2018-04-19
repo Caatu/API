@@ -48,7 +48,7 @@ class Sensor(BaseModel):
     sensor_type = models.ForeignKey(
         SensorType, related_name="sensortype", on_delete=models.CASCADE)
     colector = models.ForeignKey(
-        Local, related_name="sensors", on_delete=models.CASCADE)
+        Colector, related_name="sensors", on_delete=models.CASCADE)
     modified_at = models.DateTimeField(auto_now=True)
 
 

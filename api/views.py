@@ -108,7 +108,7 @@ class ColectorsViewSet(viewsets.ModelViewSet):
 
 
 class SensorsViewSet(viewsets.ModelViewSet):
-    queryset = Sensor.objects.values('name', 'sensor_type', 'measurements')
+    queryset = Sensor.objects.all()
     serializer_class = SensorSerializer
     authentication_classes = []
     permission_classes = ()

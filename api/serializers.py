@@ -39,7 +39,7 @@ class AlertSerializer(serializers.ModelSerializer):
 class SensorTypeSerializer(serializers.ModelSerializer):
     class Meta:
         model = SensorType
-        fields = ('id', 'name', 'created_at')
+        fields = ('id', 'created_at')
 
 
 class SensorMeasureSerializer(serializers.ModelSerializer):
@@ -54,7 +54,7 @@ class SensorSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Sensor
-        fields = ('id', 'sensor_type', 'local',
+        fields = ('id', 'sensor_type',
                   'name', 'modified_at', 'created_at')
 
 
