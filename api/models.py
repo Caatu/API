@@ -34,7 +34,7 @@ class Local(BaseModel):
 
 class Colector(BaseModel):
     name = models.CharField(max_length=255)
-    identify = models.CharField(max_length=255)
+    identify = models.CharField(max_length=255, unique=True)
     local = models.ForeignKey(
         Local, related_name="colectors", on_delete=models.CASCADE)
 
