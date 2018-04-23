@@ -1,15 +1,21 @@
 #!/usr/bin/python3
-import paho.mqtt.client as mqtt
 import json
 import time
+
+import django
+import paho.mqtt.client as mqtt
+from django.conf import settings
 from django.core.exceptions import ObjectDoesNotExist
+
+from ..Caatu.settings import Caatu_defaults
+
 
 def on_connect(client, userdata, flags, rc):
     client.subscribe("/gustavoguerino2@gmail.com/#")
 
 
 def on_message(client, userdata, message):
-    from api.models import Sensor, Colector, SensorType, SensorMeasure
+    from models import Sensor, Colector, SensorType, SensorMeasure
     # print("\n\n\nMessage received " ,str(message.payload.decode("utf-8")))
     # print("Message topic=",message.topic)
     # print("Message qos=",message.qos)
@@ -54,6 +60,9 @@ def on_message(client, userdata, message):
         print(Colector.objects.filter(identify=topics[2]))
 
 
+django.settings.configure(default_settings=caatu_defaults, DEBUG=True)
+django.setup()
+
 brokerUserName = "gustavoguerino2@gmail.com"
 brokerPassword = "66db79f5"
 brokerApi = "mqtt.dioty.co"
@@ -67,3 +76,6 @@ client.username_pw_set(username=brokerUserName, password=brokerPassword)
 client.connect(brokerApi, brokerPort, 60)
 
 client.loop_start()
+
+while 1:
+    time.sleep(1)
