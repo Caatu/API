@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 """
 
 import os
+import dj_database_url
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -26,7 +27,10 @@ SECRET_KEY = '%a+wm^%vyuil(@6)5$pjdu+0)if@=f=4jpterdz$#^-qe7v^3('
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    'api-caatu.herokuapp.com'
+    'api-caatu.herokuapp.com',
+    '127.0.0.1',
+    'localhost'
+
 ]
 
 CORS_ORIGIN_WHITELIST = (
@@ -112,6 +116,7 @@ DATABASES = {
         'PORT': '5432',
     }
 }
+DATABASES['default'] = dj_database_url.config(default='postgres://postgres:postgres@127.0.0.1:5432/caatu')
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
