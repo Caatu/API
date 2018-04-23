@@ -26,7 +26,7 @@ SECRET_KEY = '%a+wm^%vyuil(@6)5$pjdu+0)if@=f=4jpterdz$#^-qe7v^3('
 DEBUG = True
 
 ALLOWED_HOSTS = [
-    api-caatu.herokuapp.com
+    'api-caatu.herokuapp.com'
 ]
 
 CORS_ORIGIN_WHITELIST = (
