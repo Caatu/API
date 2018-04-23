@@ -12,11 +12,19 @@ https://docs.djangoproject.com/en/2.0/ref/settings/
 
 import os
 import dj_database_url
-
+import django_heroku
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/1.9/howto/static-files/
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+STATIC_URL = '/static/'
 
+# Extra places for collectstatic to find static files.
+STATICFILES_DIRS = (
+    os.path.join(BASE_DIR, 'static'),
+)
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/2.0/howto/deployment/checklist/
 
@@ -116,7 +124,8 @@ DATABASES = {
         'PORT': '5432',
     }
 }
-DATABASES['default'] = dj_database_url.config(default='postgres://postgres:postgres@127.0.0.1:5432/caatu')
+DATABASES['default'] = dj_database_url.config(
+    default='postgres://jfinfghqdxyoqk:79bc27def3a7436c388206b1aa6f365d062b1f20b5a895a846b896c70ccbf0a8@ec2-23-23-247-222.compute-1.amazonaws.com:5432/df54i0mms9lel3')
 
 # Password validation
 # https://docs.djangoproject.com/en/2.0/ref/settings/#auth-password-validators
@@ -150,8 +159,4 @@ USE_L10N = True
 
 USE_TZ = True
 
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/2.0/howto/static-files/
-
-STATIC_URL = '/static/'
+django_heroku.settings(locals())
