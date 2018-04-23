@@ -66,4 +66,4 @@ client.username_pw_set(username=brokerUserName, password=brokerPassword)
 
 client.connect(brokerApi, brokerPort, 60)
 
-mqtt.client.loop_start()
+client.loop_start()
