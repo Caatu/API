@@ -1,2 +1,2 @@
 web: gunicorn Caatu.wsgi --log-file -
-mqtt: python api/mqtt.py
+worker: python manage.py runscript mqtt

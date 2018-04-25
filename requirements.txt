@@ -3,6 +3,7 @@ certifi==2018.1.18
 dj-database-url==0.5.0
 Django==2.0.2
 django-cors-headers==2.2.0
+django-extensions==2.0.7
 django-filter==1.1.0
 django-heroku==0.3.1
 djangorestframework==3.7.7
@@ -14,6 +15,7 @@ psycopg2==2.7.4
 psycopg2-binary==2.7.4
 pycodestyle==2.4.0
 pytz==2018.3
+six==1.11.0
 virtualenv==15.2.0
 virtualenv-clone==0.3.0
 whitenoise==3.3.1
