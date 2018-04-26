@@ -75,16 +75,6 @@ class UnitsView(APIView):
             return Response(serializer.data.get("id"), status=status.HTTP_201_CREATED)
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
-    def update(self, request, pk):
-        queryset = Unit.objects.filter(id=pk)
-        if queryset is not None:
-            queryset.name = request.data.get("name")
-            queryset.save()
-            return Response("Editado com sucesso!",status=status.HTTP_200_OK)
-        else:
-            return Response("Falha ao editar, unidade não encontrada!", status=status.HTTP_400_BAD_REQUEST)
-
-
 
 class UnitDetailsView(APIView):
     permission_classes = ()
@@ -106,6 +96,16 @@ class UnitDetailsView(APIView):
             Unit.objects.delete(pk=pk)
         except ObjectDoesNotExist:
             return Response({"error": "Erro ao apagar, unidade não encontrada!"}, status=status.HTTP_404_NOT_FOUND)
+
+    
+    def update(self, request, pk):
+        queryset = Unit.objects.filter(id=pk)
+        if queryset is not None:
+            queryset.name = request.data.get("name")
+            queryset.save()
+            return Response("Editado com sucesso!",status=status.HTTP_200_OK)
+        else:
+            return Response("Falha ao editar, unidade não encontrada!", status=status.HTTP_400_BAD_REQUEST)
 
 
 class LocalsViewSet(viewsets.ModelViewSet):
