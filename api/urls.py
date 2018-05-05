@@ -11,7 +11,7 @@ urlpatterns = [
     path('locals/', views.LocalsViewSet.as_view(itemList), name="locals-list"),
     path('sensors/', views.SensorsViewSet.as_view(itemList), name="sensors-list"),
     path('alerts/', views.AlertsViewSet.as_view(itemList), name="alerts-list"),
-    path('colectors', views.ColectorsViewSet.as_view(
+    path('colectors/', views.ColectorsViewSet.as_view(
         itemList), name="colectors-list"),
     # Detailed routes
     path('units/<int:pk>/', views.UnitDetailsView.as_view(),
