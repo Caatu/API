@@ -99,10 +99,10 @@ class UnitDetailsView(APIView):
 
     
     def update(self, request, pk):
-        queryset = Unit.objects.filter(id=pk)
-        if queryset is not None:
-            queryset.name = request.data.get("name")
-            queryset.save()
+        unit = Unit.objects.filter(id=pk)
+        if unit is not None:
+            unit.name = request.data.get("name")
+            unit.save()
             return Response("Editado com sucesso!",status=status.HTTP_200_OK)
         else:
             return Response("Falha ao editar, unidade não encontrada!", status=status.HTTP_400_BAD_REQUEST)
