@@ -82,13 +82,13 @@ class UnitSerializer(serializers.ModelSerializer):
     # mudar o nome locals pois ele é reservado
     #locals = LocalSerializerWithoutSensors(many=True)
     def create(self, validated_data):
-        print(validated_data.get('user_id'))
+        print(validated_data)
         unit = Unit.objects.create(**validated_data)
         unit.save()
         return unit
 
     class Meta:
         model = Unit
-        fields = ('id', 'user_id', 'name', 'locals', 'created_at')
+        fields = ('id', 'user', 'name', 'locals', 'created_at')
     
 
