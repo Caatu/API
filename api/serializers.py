@@ -80,11 +80,11 @@ class LocalSerializerWithoutSensors(serializers.ModelSerializer):
 
 class UnitSerializer(serializers.ModelSerializer):
     # mudar o nome locals pois ele é reservado
-    #locals = LocalSerializerWithoutSensors(many=True)
+    locals = LocalSerializerWithoutSensors(many=True)
     def create(self, validated_data):
         print(validated_data)
         unit = Unit.objects.create(**validated_data)
-        unit.locals.set(validated_data['locals'])
+        unit.locals.set(locals)
         unit.save()
         return unit
 
