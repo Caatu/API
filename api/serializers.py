@@ -69,13 +69,13 @@ class ColectorSerializer(serializers.ModelSerializer):
 class LocalSerializer(serializers.ModelSerializer):
     class Meta:
         model = Local
-        fields = ('id', 'name', 'sensors', 'created_at')
+        fields = ('id', 'name', 'unit', 'created_at')
 
 
 class LocalSerializerWithoutSensors(serializers.ModelSerializer):
     class Meta:
         model = Local
-        fields = ('id', 'name', 'created_at')
+        fields = ('id', 'name', 'unit', 'created_at')
 
 
 class UnitSerializer(serializers.ModelSerializer):
