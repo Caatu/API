@@ -89,6 +89,6 @@ class UnitSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Unit
-        fields = ('id', 'name', 'locals', 'created_at')
+        fields = ('id', 'user_id', 'name', 'locals', 'created_at')
     
 
