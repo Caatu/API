@@ -84,6 +84,7 @@ class UnitSerializer(serializers.ModelSerializer):
     def create(self, validated_data):
         print(validated_data)
         unit = Unit.objects.create(**validated_data)
+        unit.locals.set(validated_data['locals'])
         unit.save()
         return unit
 
