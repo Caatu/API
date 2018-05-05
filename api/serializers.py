@@ -83,8 +83,10 @@ class UnitSerializer(serializers.ModelSerializer):
     locals = LocalSerializerWithoutSensors(many=True)
     def create(self, validated_data):
         print(validated_data)
+        locals_data = validated_data.pop('locals')
         unit = Unit.objects.create(**validated_data)
-        unit.locals.set(locals)
+        for local_data in locals_data:
+            Local.objects.create(unit=unit, **local_data)
         unit.save()
         return unit
 
