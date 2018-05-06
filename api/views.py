@@ -64,7 +64,7 @@ class UnitsUser(APIView):
 
     def get(self, request, pk):
         queryset = Unit.objects.filter(user=pk)
-        serializer = UnitSerializer(queryset, many = true)
+        serializer = UnitSerializer(queryset, many=True)
         return Response(serializer.data)
 
 class UnitsView(APIView):
