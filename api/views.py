@@ -58,6 +58,15 @@ class UserAuth(APIView):
         return Response("Credenciais Inválidas", status=status.HTTP_400_BAD_REQUEST)
 
 
+
+class UnitsUser(APIView):
+    permission_classes = ()
+
+    def get(self, request, pk):
+        queryset = Unit.objects.filter(user=pk)
+        serializer = UnitSerializer(queryset, many = true)
+        return Response(serializer.data)
+
 class UnitsView(APIView):
 
     permission_classes = ()

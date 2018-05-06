@@ -29,5 +29,6 @@ urlpatterns = [
          views.SensorMeasureViewSet.as_view(itemList), name="measurements-list"),
     path('sensors/<int:idsensor>/measurements/<int:pk>/',
          views.SensorMeasureViewSet.as_view(itemDetail), name="measurements-detail"),
-
+    # Rotas especificas
+    path('units/user/<int:pk>', views.UnitsUser.as_view(), name="units-user"),
 ]
